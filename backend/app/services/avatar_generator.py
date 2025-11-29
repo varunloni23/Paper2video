@@ -314,7 +314,7 @@ class SVGAvatarGenerator:
                 output_path
             ]
             
-            result = subprocess.run(cmd, capture_output=True, text=True)
+            result = subprocess.run(cmd, capture_output=True, text=True, stdin=subprocess.DEVNULL)
             
             if result.returncode == 0:
                 return {"success": True, "path": output_path}

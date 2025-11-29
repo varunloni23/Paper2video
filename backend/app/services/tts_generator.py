@@ -89,7 +89,7 @@ class TTSGenerator:
                     '--write-media', output_path
                 ]
                 
-                result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+                result = subprocess.run(cmd, capture_output=True, text=True, timeout=60, stdin=subprocess.DEVNULL)
                 
                 if result.returncode != 0:
                     return {"success": False, "error": result.stderr or "edge-tts failed"}
@@ -124,7 +124,7 @@ class TTSGenerator:
                 text
             ]
             
-            result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, stdin=subprocess.DEVNULL)
             if result.returncode != 0:
                 return {"success": False, "error": f"macOS say failed: {result.stderr}"}
             
@@ -136,7 +136,7 @@ class TTSGenerator:
                 output_path
             ]
             
-            result = subprocess.run(cmd_ffmpeg, capture_output=True, text=True, timeout=60)
+            result = subprocess.run(cmd_ffmpeg, capture_output=True, text=True, timeout=60, stdin=subprocess.DEVNULL)
             
             if os.path.exists(temp_aiff):
                 os.unlink(temp_aiff)
